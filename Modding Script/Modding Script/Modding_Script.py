@@ -4,7 +4,7 @@ Archive_list = []
 file_list = []
 Folder_Name = []
 working_folder = os.getcwd()
-Check_to_see_if_file_has_archive_extension = [".7z",".ace",".alz",".a",".arc",".arj",".bz2",".cab",".Z",".cpio",".deb",".dms",".gz",".lrz",".lha",".lzh",".lz",".;zma",".lzo",".rpm",".rar",".rz",".tar",".xz",".zip",".jar",".zoo"]
+Check_to_see_if_file_has_archive_extension = [".7z",".ace",".alz",".a",".arc",".arj",".bz2",".cab",".Z",".cpio",".deb",".dms",".gz",".lrz",".lha",".lzh",".lz",".lzma",".lzo",".rpm",".rar",".rz",".tar",".xz",".zip",".jar",".zoo"]
 def extract_everything_in_the_folder():
     for file in os.listdir():
         file_list.append(file)
@@ -33,11 +33,9 @@ def Search_Folder_For_BSA_file(File_and_Folder_Name):
             for new_contents in temp:
                 temp_indice = new_contents.rfind(".")
                 extension = new_contents[temp_indice:]
-                print("This is: ",contents,extension,"\n \n \n")
                 if new_contents == "fomod" or extension == ".bsa":
                     return True
         else:
-            print(file_list)
             temp_indice = contents.find(".")
             extension = contents[temp_indice:]
             if contents == "fomod" or extension == ".bsa":
