@@ -23,44 +23,25 @@ def extract_everything_in_the_folder():
             continue
 def Search_Folder_For_BSA_file(File_and_Folder_Name):
     os.chdir(File_and_Folder_Name)
-    for file in os.listdir():
-        file_list.append(file)
-    for item in file_list:
-        is_directory = os.path.isdir(item)
-        if is_directory == True:
-            is_directory_current_directory = File_and_Folder_Name.find(item)
-            if is_directory_current_directory == -1:
-                if item == "fomod":
+    file_list = os.listdir()
+    for contents in file_list:
+        if contents == "fomod":
+            return True
+        if os.path.isdir(str(File_and_Folder_Name+"\\"+contents)) == True:
+            os.chdir(File_and_Folder_Name+"\\"+contents)
+            temp = os.listdir()
+            for new_contents in temp:
+                temp_indice = new_contents.rfind(".")
+                extension = new_contents[temp_indice:]
+                print("This is: ",contents,extension,"\n \n \n")
+                if new_contents == "fomod" or extension == ".bsa":
                     return True
-                if os.path.exists(File_and_Folder_Name+"\\"+item):
-                    os.chdir(File_and_Folder_Name+"\\"+item)
-                    if item == "fomod":
-                        return True
-                    temp = []
-                    for file in os.listdir():
-                        temp.append(file)
-                    for file in temp:
-                        if file == "fomod":
-                            return True
-                        temp_num = file.rfind(".")
-                        if temp_num != -1:
-                            temp_extension = file[temp_num:]
-                            if temp_extension == ".bsa" or temp == "fomod" or item == "fomod" or temp_extension == ".fomod":
-                                return True
         else:
-            temp_num = file.rfind(".")
-            if temp_num != -1:
-                temp_folder = file[:temp_num]
-                folder_exists = str(File_and_Folder_Name+"\\"+temp_folder)
-                if os.path.isdir(folder_exists) == True: #TODO: it's returning correctly for certain files. find a way tomorrow to "intelligently check if a file is in the folder you're in
-                    os.chdir(folder_exists)
-                    temp_extension = file[temp_num:]
-                    if temp_extension == ".bsa" or temp_folder == "fomod" or item == "fomod" or temp_extension == ".fomod":
-                        return True
-                else:
-                    temp_extension = file[temp_num:]
-                    if temp_extension == ".bsa" or temp_folder == "fomod" or item == "fomod" or temp_extension == ".fomod":
-                        return True
+            print(file_list)
+            temp_indice = contents.find(".")
+            extension = contents[temp_indice:]
+            if contents == "fomod" or extension == ".bsa":
+                return True
     return False
 def Delete_Folder(Folder_to_be_Deleted):
     shutil.rmtree(Folder_to_be_Deleted)
