@@ -1,2 +1,2 @@
-Pyunpack Version: >= 0.1.2
-Patool Version: >= 1.12
+Pyunpack Version>= 0.1.2
+Patool Version>= 1.12
